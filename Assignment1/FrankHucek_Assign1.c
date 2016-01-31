@@ -16,7 +16,7 @@ void handle_parent();
 void handle_child1();
 void handle_child2();
 
-char env_var[7] = "WHALE=7";
+char env_var[8] = "WHALE=7";
 
 int main(void)
 {
@@ -30,7 +30,7 @@ int main(void)
   print_time();
 
   /* CWD */
-  print_cwd("PO");
+  print_cwd("P0");
 
   /* Create ENV Var */
   putenv(env_var); // to change env variable, change actual character pointer
@@ -63,10 +63,10 @@ void adjust_whale(char *process, int start_val)
 
     val = atoi(wh);
     printf("%s:\t%d shrimp (WHALE environment variable value now is now %d)\n", process, val, val);
+    fflush(stdout);
     val = val - 3;
 
     *wh = val +'0';
-    fflush(stdout);
     sleep(3);
   } while (val > 0);
 }
@@ -77,6 +77,7 @@ void print_pid(char *calling_process)
   pid_t main_pid = getpid();
   pid_t parent_pid = getppid();
   printf("%s:\tmain PID: %d\tparent PID: %d\n", calling_process, main_pid, parent_pid);
+  fflush(stdout);
 }
 
 void print_time()
@@ -103,6 +104,7 @@ void print_time()
   }
 
   printf("P0:\t%s", tme);
+  fflush(stdout);
 }
 
 void print_userhost()
@@ -126,6 +128,7 @@ void print_userhost()
   }
 
   printf("P0:\tuser: %s\thostname: %s\n", user, hostname);
+  fflush(stdout);
 }
 
 void print_cwd(char* process)
@@ -145,6 +148,7 @@ void print_cwd(char* process)
   }
 
   printf("%s:\t%s\n", process, cwd);
+  fflush(stdout);
 }
 
 void handle_processes()
@@ -194,7 +198,7 @@ void handle_child1()
   printf("C1:\t");
   fflush(stdout);
   chdir("/");
-  execlp("ls", "-la");
+  execlp("ls", "ls", "-la", (char *) NULL);
 
   _exit(0);
 }
@@ -225,19 +229,19 @@ void handle_parent(int c1, int c2)
     _exit(1);
   }
 
+  char *wh = getenv("WHALE");
+  if(wh == NULL)
+  {
+    perror("getenv failed");
+    _exit(1);
+  }
 
-    char *wh = getenv("WHALE");
-    if(wh == NULL)
-    {
-      perror("getenv failed");
-      _exit(1);
-    }
+  int val = atoi(wh);
+  printf("P0:\t%d shrimp (WHALE environment variable value now is now %d)\n", val, val);
+  fflush(stdout);
+  val = val - 1;
 
-    int val = atoi(wh);
-    printf("PO:\t%d shrimp (WHALE environment variable value now is now %d)\n", val, val);
-    val = val - 1;
-
-    *wh = val +'0';
+  *wh = val +'0';
 
   if(status1 == 0 && status2 == 0)
     printf("all terminated successfully.\n");
