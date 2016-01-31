@@ -10,7 +10,7 @@ void adjust_whale(char *process, int start_val);
 void print_pid(char *calling_process);
 void print_userhost();
 void print_time();
-void print_cwd();
+void print_cwd(char *process);
 void handle_processes();
 void handle_parent();
 void handle_child1();
@@ -30,7 +30,7 @@ int main(void)
   print_time();
 
   /* CWD */
-  print_cwd();
+  print_cwd("PO");
 
   /* Create ENV Var */
   putenv(env_var); // to change env variable, change actual character pointer
@@ -55,6 +55,7 @@ void adjust_whale(char *process, int start_val)
     val = val - 3;
 
     *wh = val +'0';
+    fflush(stdout);
     sleep(3);
   } while (val > 0);
 }
@@ -84,11 +85,11 @@ void print_userhost()
   printf("P0:\tuser: %s\thostname: %s\n", user, hostname);
 }
 
-void print_cwd()
+void print_cwd(char* process)
 {
   char *cwd = (char *)calloc(100, sizeof(char));
   getcwd(cwd, 100 * sizeof(char)); // ignore return value
-  printf("P0:\t%s\n", cwd);
+  printf("%s:\t%s\n", process, cwd);
 }
 
 void handle_processes()
@@ -133,7 +134,12 @@ void handle_child1()
   sleep(2);
   adjust_whale("C1", 6);
 
+  sleep(3);
 
+  printf("C1:\t");
+  fflush(stdout);
+  chdir("/");
+  execlp("ls", "-la");
 
   _exit(0);
 }
@@ -144,7 +150,8 @@ void handle_child2()
   sleep(3);
   adjust_whale("C2", 5);
 
-
+  sleep(3);
+  print_cwd("C2");
 
   _exit(0);
 }
@@ -160,7 +167,7 @@ void handle_parent(int c1, int c2)
 
     char *wh = getenv("WHALE");
     int val = atoi(wh);
-    printf("PO:\tFinal Value of Whale%d shrimp (WHALE environment variable value now is now %d)\n", val, val);
+    printf("PO:\t%d shrimp (WHALE environment variable value now is now %d)\n", val, val);
     val = val - 1;
 
     *wh = val +'0';
