@@ -42,14 +42,25 @@ int main(void)
 
 void adjust_whale(char *process, int start_val)
 {
-  // change value at env_var[6]
   int val;
-  char *wh = getenv("WHALE");
+  char *wh = getenv("WHALE"); // returns NULL if nothing
+  if(wh == NULL)
+  {
+    perror("getenv failed.");
+    _exit(1);
+  }
+
   *wh = start_val + '0';
 
   do
   {
     wh = getenv("WHALE");
+    if(wh == NULL)
+    {
+      perror("getenv failed.");
+      _exit(1);
+    }
+
     val = atoi(wh);
     printf("%s:\t%d shrimp (WHALE environment variable value now is now %d)\n", process, val, val);
     val = val - 3;
@@ -71,8 +82,26 @@ void print_pid(char *calling_process)
 void print_time()
 {
   time_t *t = (time_t *) calloc(50, sizeof(time_t));
-  (void)time(t); // ignore return value
+  if(t == NULL)
+  {
+    perror("Couldn't allocate memory");
+    _exit(1);
+  }
+
+  int success = time(t); // ignore return value
+  if(success < 0)
+  {
+    perror("call to time failed");
+    _exit(1);
+  }
+
   char *tme = ctime(t);
+  if(tme == NULL)
+  {
+    perror("Failed to format time with ctime");
+    _exit(1);
+  }
+
   printf("P0:\t%s", tme);
 }
 
@@ -80,15 +109,41 @@ void print_userhost()
 {
   char *hostname = (char *) calloc(50, sizeof(char));
   char *user = (char *) calloc(50, sizeof(char));
-  gethostname(hostname, 50 * sizeof(char)); // ignore return value
-  cuserid(user, 50 * sizeof(char)); // ignore return value
+  if((hostname == NULL) || (user == NULL))
+  {
+    perror("Failed to allocate memory");
+    _exit(1);
+  }
+
+  int success = gethostname(hostname, 50 * sizeof(char)); // ignore return value
+  //cuserid(user, 50 * sizeof(char)); // ignore return value
+  user = getlogin();
+
+  if((success < 0) || (user == NULL))
+  {
+    perror("Failed to get user/hostname");
+    _exit(1);
+  }
+
   printf("P0:\tuser: %s\thostname: %s\n", user, hostname);
 }
 
 void print_cwd(char* process)
 {
   char *cwd = (char *)calloc(100, sizeof(char));
-  getcwd(cwd, 100 * sizeof(char)); // ignore return value
+  if(cwd == NULL)
+  {
+    perror("Failed to allocate memory");
+    _exit(1);
+  }
+
+  char *success = getcwd(cwd, 100 * sizeof(char)); // ignore return value
+  if(success == NULL)
+  {
+    perror("Failed to get cwd");
+    _exit(1);
+  }
+
   printf("%s:\t%s\n", process, cwd);
 }
 
@@ -106,7 +161,7 @@ void handle_processes()
   // make sure no failures with fork
   if(c1 < 0 || c2 < 0)
   {
-    printf("Something failed with fork...\n");
+    perror("Something failed with fork...\n");
     _exit(1);
   }
 
@@ -162,10 +217,22 @@ void handle_parent(int c1, int c2)
   adjust_whale("P0", 7);
 
   int status1, status2;
-  waitpid(c1, &status1, 0);
-  waitpid(c2, &status2, 0);
+  int success1 = waitpid(c1, &status1, 0);
+  int success2 = waitpid(c2, &status2, 0);
+  if((success1 < 0) || (success2 < 0))
+  {
+    perror("waiting for children failed");
+    _exit(1);
+  }
+
 
     char *wh = getenv("WHALE");
+    if(wh == NULL)
+    {
+      perror("getenv failed");
+      _exit(1);
+    }
+
     int val = atoi(wh);
     printf("PO:\t%d shrimp (WHALE environment variable value now is now %d)\n", val, val);
     val = val - 1;
