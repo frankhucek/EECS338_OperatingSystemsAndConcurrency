@@ -63,7 +63,11 @@ void adjust_whale(char *process, int start_val)
 
     val = atoi(wh);
     printf("%s:\t%d shrimp (WHALE environment variable value now is now %d)\n", process, val, val);
-    fflush(stdout);
+    if(fflush(stdout) < 0)
+    {
+      perror("Failed to fflush");
+      _exit(1);
+    }
     val = val - 3;
 
     *wh = val +'0';
@@ -77,7 +81,11 @@ void print_pid(char *calling_process)
   pid_t main_pid = getpid();
   pid_t parent_pid = getppid();
   printf("%s:\tmain PID: %d\tparent PID: %d\n", calling_process, main_pid, parent_pid);
-  fflush(stdout);
+  if(fflush(stdout) < 0)
+  {
+    perror("Failed to fflush");
+    _exit(1);
+  }
 }
 
 void print_time()
@@ -104,7 +112,11 @@ void print_time()
   }
 
   printf("P0:\t%s", tme);
-  fflush(stdout);
+  if(fflush(stdout) < 0)
+  {
+    perror("Failed to fflush");
+    _exit(1);
+  }
 }
 
 void print_userhost()
@@ -128,7 +140,11 @@ void print_userhost()
   }
 
   printf("P0:\tuser: %s\thostname: %s\n", user, hostname);
-  fflush(stdout);
+  if(fflush(stdout) < 0)
+  {
+    perror("Failed to fflush");
+    _exit(1);
+  }
 }
 
 void print_cwd(char* process)
@@ -148,7 +164,11 @@ void print_cwd(char* process)
   }
 
   printf("%s:\t%s\n", process, cwd);
-  fflush(stdout);
+  if(fflush(stdout) < 0)
+  {
+    perror("Failed to fflush");
+    _exit(1);
+  }
 }
 
 void handle_processes()
@@ -196,7 +216,11 @@ void handle_child1()
   sleep(3);
 
   printf("C1:\t");
-  fflush(stdout);
+  if(fflush(stdout) < 0)
+  {
+    perror("Failed to fflush");
+    _exit(1);
+  }
   chdir("/");
   execlp("ls", "ls", "-la", (char *) NULL);
 
@@ -238,7 +262,11 @@ void handle_parent(int c1, int c2)
 
   int val = atoi(wh);
   printf("P0:\t%d shrimp (WHALE environment variable value now is now %d)\n", val, val);
-  fflush(stdout);
+  if(fflush(stdout) < 0)
+  {
+    perror("Failed to fflush");
+    _exit(1);
+  }
   val = val - 1;
 
   *wh = val +'0';

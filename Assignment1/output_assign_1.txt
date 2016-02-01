@@ -1,9 +1,9 @@
-P0:	main PID: 17986	parent PID: 17919
+P0:	main PID: 19141	parent PID: 18993
 P0:	user: frank	hostname: radium
-P0:	Sun Jan 31 17:06:55 2016
+P0:	Mon Feb  1 12:36:18 2016
 P0:	/home/frank/Documents/OperatingSystems_EECS338/Assignment1
-C1:	main PID: 17987	parent PID: 17986
-C2:	main PID: 17988	parent PID: 17986
+C1:	main PID: 19142	parent PID: 19141
+C2:	main PID: 19143	parent PID: 19141
 P0:	7 shrimp (WHALE environment variable value now is now 7)
 C1:	6 shrimp (WHALE environment variable value now is now 6)
 C2:	5 shrimp (WHALE environment variable value now is now 5)
@@ -16,7 +16,7 @@ drwxr-xr-x  18 root root  4096 Oct  5 20:08 .
 drwxr-xr-x  18 root root  4096 Oct  5 20:08 ..
 lrwxrwxrwx   1 root root     7 Sep 30 14:17 bin -> usr/bin
 drwxr-xr-x   7 root root  4096 Dec 31  1969 boot
-drwxr-xr-x  19 root root  3280 Jan 30 21:10 dev
+drwxr-xr-x  19 root root  3280 Jan 31 22:24 dev
 drwxr-xr-x  81 root root  4096 Jan 31 14:39 etc
 drwxr-xr-x   6 root root  4096 Oct  4 23:29 home
 lrwxrwxrwx   1 root root     7 Sep 30 14:17 lib -> usr/lib
@@ -24,14 +24,14 @@ lrwxrwxrwx   1 root root     7 Sep 30 14:17 lib64 -> usr/lib
 drwx------   2 root root 16384 Jan 22  2015 lost+found
 drwxr-xr-x   2 root root  4096 Oct 25  2014 mnt
 drwxr-xr-x   6 root root  4096 Oct  6 21:01 opt
-dr-xr-xr-x 159 root root     0 Jan 30 21:09 proc
+dr-xr-xr-x 140 root root     0 Jan 31 22:24 proc
 drwxr-x---  17 root root  4096 Dec 24 21:35 root
-drwxr-xr-x  23 root root   580 Jan 30 21:10 run
+drwxr-xr-x  22 root root   560 Jan 31 22:25 run
 lrwxrwxrwx   1 root root     7 Sep 30 14:17 sbin -> usr/bin
 drwxr-xr-x   5 root root  4096 Sep 13 03:20 srv
-dr-xr-xr-x  13 root root     0 Jan 30 21:09 sys
+dr-xr-xr-x  13 root root     0 Jan 31 22:24 sys
 drwxr-xr-x   2 root root  4096 Jun 16  2015 tempdir
-drwxrwxrwt  10 root root   280 Jan 31 17:06 tmp
+drwxrwxrwt   9 root root   280 Feb  1 12:35 tmp
 drwxr-xr-x  11 root root  4096 Dec 16 12:15 usr
 drwxr-xr-x  13 root root  4096 Oct  5 20:08 var
 C2:	/home/frank/Documents/OperatingSystems_EECS338/Assignment1
