@@ -1,3 +1,11 @@
+/*
+  Frank Hucek
+  fjh32
+  EECS 338: Intro to OSs and Concurrency
+  Assignment 1
+  2/1/2016
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -40,6 +48,10 @@ int main(void)
   return 0;
 }
 
+/*
+  Properly adjust WHALE env variable.
+  Adjustments are made to accommodate for proper output format.
+ */
 void adjust_whale(char *process, int start_val)
 {
   int val;
@@ -62,7 +74,7 @@ void adjust_whale(char *process, int start_val)
     }
 
     val = atoi(wh);
-    printf("%s:\t%d shrimp (WHALE environment variable value now is now %d)\n", process, val, val);
+    printf("%s:\t%d shrimp (WHALE environment variable value is now %d)\n", process, val, val);
     if(fflush(stdout) < 0)
     {
       perror("Failed to fflush");
@@ -75,6 +87,9 @@ void adjust_whale(char *process, int start_val)
   } while (val > 0);
 }
 
+/*
+  Prints this process ID followed by its parent ID
+ */
 void print_pid(char *calling_process)
 {
   /* PIDs */
@@ -88,6 +103,9 @@ void print_pid(char *calling_process)
   }
 }
 
+/*
+  Prints formatted date/time
+ */
 void print_time()
 {
   time_t *t = (time_t *) calloc(50, sizeof(time_t));
@@ -119,6 +137,9 @@ void print_time()
   }
 }
 
+/*
+  Prints the username and the hostname
+ */
 void print_userhost()
 {
   char *hostname = (char *) calloc(50, sizeof(char));
@@ -147,6 +168,9 @@ void print_userhost()
   }
 }
 
+/*
+  Print the current working directory
+ */
 void print_cwd(char* process)
 {
   char *cwd = (char *)calloc(100, sizeof(char));
@@ -171,6 +195,9 @@ void print_cwd(char* process)
   }
 }
 
+/*
+  Handle all processes
+ */
 void handle_processes()
 {
   int c1 = fork();
@@ -207,6 +234,9 @@ void handle_processes()
   }
 }
 
+/*
+  Handle child 1
+ */
 void handle_child1()
 {
   print_pid("C1");
@@ -224,9 +254,13 @@ void handle_child1()
   chdir("/");
   execlp("ls", "ls", "-la", (char *) NULL);
 
-  _exit(0);
+  // should never reach this. if we do, exec fails
+  _exit(1);
 }
 
+/*
+  Handles child 2
+ */
 void handle_child2()
 {
   sleep(1);
@@ -240,6 +274,9 @@ void handle_child2()
   _exit(0);
 }
 
+/*
+  Handles the parent
+ */
 void handle_parent(int c1, int c2)
 {
   sleep(2);
@@ -273,5 +310,5 @@ void handle_parent(int c1, int c2)
   *wh = val +'0';
 
   if(status1 == 0 && status2 == 0)
-    printf("all terminated successfully.\n");
+    printf("All terminated successfully.\n");
 }
