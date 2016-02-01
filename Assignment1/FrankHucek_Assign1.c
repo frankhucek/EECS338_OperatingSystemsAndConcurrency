@@ -210,7 +210,7 @@ void handle_processes()
 void handle_child1()
 {
   print_pid("C1");
-  sleep(2);
+  sleep(3);
   adjust_whale("C1", 6);
 
   sleep(3);
@@ -229,6 +229,7 @@ void handle_child1()
 
 void handle_child2()
 {
+  sleep(1);
   print_pid("C2");
   sleep(3);
   adjust_whale("C2", 5);
@@ -241,7 +242,7 @@ void handle_child2()
 
 void handle_parent(int c1, int c2)
 {
-  sleep(1);
+  sleep(2);
   adjust_whale("P0", 7);
 
   int status1, status2;
