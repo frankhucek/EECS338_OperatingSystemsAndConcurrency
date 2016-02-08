@@ -1,0 +1,19 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Feb  8 11:36:13 2016
+;; Desktop file format version 206
+;; Emacs version 24.5.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (22200 53773 702764 35000) (desktop . "206") "frank@radium.STUDENT.cwru.edu" nil nil ((((tty-type . "rxvt-unicode") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "#E0E0E0") (cursor-color . "black") (background-color . "unspecified-bg") (tool-bar-lines . 0) (menu-bar-lines . 0) (vertical-scroll-bars) (font . "tty") (height . 61) (width . 227) (modeline . t) (unsplittable) (frameset--id . "512D-392D-F915-0ACF") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 227) (pixel-height . 60) (total-width . 227) (total-height . 60) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 1) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/Documents/OperatingSystems_EECS338/Assignment2/" "~/.emacs.d/ido.last" "~/Documents/OperatingSystems_EECS338/Assignment2/FrankHucek_Assign2.c" "~/Documents/OperatingSystems_EECS338/Assignment2/counter.c" "~/Documents/OperatingSystems_EECS338/Assignment2/Makefile" "~/Documents/OperatingSystems_EECS338/eecs338_fjh32_assignment1/FrankHucek_Assign1.c" "~/.bashrc" "~/Documents/OperatingSystems_EECS338/eecs338_fjh32_assignment1/Makefile" "~/DataStructures-Recitation/Recitation/src/shape/Shape.java" "~/bin_storage/LoginWelcome/LoginWelcome.hs" "~/Documents/Haskell/memoizing/app/Main.hs" "~/Documents/Haskell/memoizing/src/Fibonacci.hs" "~/Documents/Haskell/memoizing/stack.yaml" "~/Documents/Haskell/memoizing/memoizing.cabal" "~/Documents/C/syscalls/funcptr.c" "~/Documents/Haskell/statewat.hs" "~/Documents/C/time_test/time_test.c" "~/Documents/C/CMakeTest/helloprint.c" "~/Documents/C/CMakeTest/test.c" "~/Documents/C/CMakeTest/helloprint.h" "~/WebPage/scotty_fileserver/Pages.hs"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
