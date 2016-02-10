@@ -68,6 +68,11 @@ int main(void)
   /* Parse the input file. Processes handle properly. */
   parse_file(input_file);
 
+  if(getpid() == main_id)
+  {
+
+  }
+
   return 0;
 }
 
@@ -162,7 +167,7 @@ void close_pipe_ends()
     for(i = 0; i < NUMBER_REDUCERS; i++)
     {
       close(reducer_pipes[i][READ_END]);
-      close(reducer_pipes[i][WRITE_END]);
+      //close(reducer_pipes[i][WRITE_END]);
     }
     break;
   /* Mappers maintain mapper read and reducer write */
@@ -221,18 +226,6 @@ void handle_parent(FILE *input)
     //printf("%d iteration:\t%s\n", i, buffer);
   }
 
-  int status;
-  for(i = 0; i < NUMBER_MAPPERS; i++)
-  {
-    waitpid(mapper_pids[i], &status, 1);
-    //wait(&mapper_pids[i]);
-  }
-  for(i = 0; i < NUMBER_REDUCERS; i++)
-  {
-    waitpid(reducer_pids[i], &status, 1);
-    //wait(&reducer_pids[i]);
-  }
-
   for(i = 0; i < NUMBER_MAPPERS; i++)
   {
     close(mapper_pipes[i][WRITE_END]);
@@ -241,10 +234,22 @@ void handle_parent(FILE *input)
   {
     close(reducer_pipes[i][WRITE_END]);
   }
-  // fflush(stdout);
+
+  int status;
+  for(i = 0; i < NUMBER_MAPPERS; i++)
+  {
+    //waitpid(mapper_pids[i], &status, 1);
+    wait(&status);
+  }
+
+  for(i = 0; i < NUMBER_REDUCERS; i++)
+  {
+    //waitpid(reducer_pids[i], &status, 1);
+    wait(&status);
+  }
+  fflush(stdout);
   printf("all terminated successfully\n");
-  // fflush(stdout);
-  exit(0);
+  fflush(stdout);
 }
 
 void handle_mapper()
@@ -272,6 +277,7 @@ void handle_mapper()
   {
     close(reducer_pipes[i][WRITE_END]);
   }
+
   exit(0);
 }
 
@@ -297,5 +303,6 @@ void handle_reducer()
   {
     close(reducer_pipes[i][READ_END]);
   }
+
   exit(0);
 }
