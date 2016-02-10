@@ -60,7 +60,11 @@ void handle_child()
 
   //int i;
   //for(i = 0; i < 512 && read(mapper_pipes[0][READ_END], &buffer[i], 1) > 0; i++);
-  read(mapper_pipes[0][READ_END], &buffer[0], 7);
+  while(read(mapper_pipes[0][READ_END], &buffer[0], 9) > 0)
+  {
+    printf("%s\n", buffer);
+    fflush(stdout);
+  }
   /*if(i < 512)
   {
     buffer[i] = '\0';
@@ -70,7 +74,7 @@ void handle_child()
     buffer[511] = '\0';
   }*/
 
-  int child_id = getpid();
+  /*int child_id = getpid();
   printf("%d: and coming through pipe: %s...\n", child_id, buffer);
   fflush(stdout);
   // cant close bc closes file desc
@@ -83,7 +87,7 @@ void handle_child()
     _exit(1);
   }
   printf("%d: and coming through pipe: %s...\n", child_id, buf);
-  fflush(stdout);
+  fflush(stdout);*/
   close(mapper_pipes[0][READ_END]);
 
   _exit(0);
@@ -91,6 +95,7 @@ void handle_child()
 
 void handle_parent()
 {
+  sleep(3);
   char *str = "Falcon";
   printf("%d: passing %s through pipe\n", getpid(), str);
   fflush(stdout);
